@@ -143,7 +143,6 @@ bool ESPMailer::send() {
 		}
 		return false;
 	}
-	Serial.println("Connected!");
 
 	if (!sendCmd("", 220)) return false;
 	if (!sendCmd(String("HELO " + Host), 250)) return false;
