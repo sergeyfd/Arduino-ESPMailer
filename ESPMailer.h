@@ -47,24 +47,20 @@ public:
 class ESPMailer {
 private:
 	WiFiClient _client;
-	MailAddress* _from;
 
+	MailAddress* _from;
 	AddressBook* _to;
 	AddressBook* _cc;
 	AddressBook* _bcc;
-	void addAddress(AddressBook*, MailAddress*);
 	int   _debug = 0;
 
+	void addAddress(AddressBook*, MailAddress*);
 	bool sendCmd(String, int);
 	bool authenticate();
 	bool sendTo(AddressBook*);
 	void sendToHeaders(char*, AddressBook*);
 	void sendHeaders();
-	// These methods depend on WiFiClient type
 	virtual WiFiClient* getClient() {return &_client;}
-	virtual int connect() {return _client.connect(Host.c_str(), Port);}
-	virtual uint8_t connected() {return _client.connected();}
-	virtual int available() {return _client.available();}
 public:
 	ESPMailer();
 
@@ -94,9 +90,6 @@ private:
 	WiFiClientSecure _clientSecure;
 
 	virtual WiFiClient* getClient() {return &_clientSecure;}
-	virtual int connect() {return _clientSecure.connect(Host.c_str(), Port);}
-	virtual uint8_t connected() {return _clientSecure.connected();}
-	virtual int available() {return _clientSecure.available();}
 public:
 	ESPMailerSecure();
 	bool setFingerprint(const char* fingerprint) {return _clientSecure.setFingerprint(fingerprint);}
