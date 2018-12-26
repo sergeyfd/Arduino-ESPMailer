@@ -47,14 +47,14 @@ public:
 class ESPMailer {
 private:
 	WiFiClient _client;
-	MailAddress* _from;
 
+	MailAddress* _from;
 	AddressBook* _to;
 	AddressBook* _cc;
 	AddressBook* _bcc;
-	void addAddress(AddressBook*, MailAddress*);
 	int   _debug = 0;
 
+	void addAddress(AddressBook*, MailAddress*);
 	bool sendCmd(String, int);
 	bool authenticate();
 	bool sendTo(AddressBook*);
