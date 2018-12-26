@@ -71,7 +71,7 @@ void ESPMailer::addBCCAddress(String address, String name) {
 
 bool ESPMailer::sendCmd(String cmd, int code) {
 	String reply;
-	if (!connected()) return false;
+	if (!getClient()->connected()) return false;
 
 	if (cmd != "") {
 		getClient()->println(cmd);
@@ -82,8 +82,7 @@ bool ESPMailer::sendCmd(String cmd, int code) {
 	}
 
 	int timeout = millis() + Timeout;
-	while (!available() && millis() < timeout)
-		delay(1);
+	while (!getClient()->available() && millis() < timeout) delay(1);
 
 	reply = getClient()->readStringUntil('\n');
 	if (_debug == SERVER || _debug == CLIENT_AND_SERVER) {
@@ -136,7 +135,7 @@ void ESPMailer::sendHeaders() {
 }
 
 bool ESPMailer::send() {
-	if (!connect()) {
+	if (!getClient()->connect(Host, Port)) {
 		if (_debug > MUTED) {
 			Serial.println("No connection to server!");
 			Serial.println(Host);
