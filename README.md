@@ -1,7 +1,7 @@
 # ESPMailer
 A very simple SMTP Client with SSL support for ESP8266 Platform.
 
-##Usage
+#Usage
 
 `ESPMailer mail`: Create a new mail client.
 
